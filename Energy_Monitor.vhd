@@ -5,9 +5,9 @@ use ieee.std_logic_1164.all;
 
 entity Energy_Monitor is port (
 
- cm_greater, cm_equals, cm_less  								: in  std_logic; 
- vacation_mode, MC_test_mode, window_open, door_open 		: in std_logic;	
- furnace, at_temp, AC, blower, window, door, vacation, increase, decrease, run_n : out std_logic
+ cm_greater, cm_equals, cm_less  							: in  std_logic; 
+ vacation_mode, MC_test_mode, window_open, door_open 					: in std_logic;	
+ furnace, at_temp, AC, blower, window, door, vacation, increase, decrease, run_n 	: out std_logic
 		 
 										); 
 end Energy_Monitor;
@@ -27,9 +27,9 @@ signal run_var, blow_var : std_logic ;
 begin
 
 -- Linking direct input to output signals
-window 	<= window_open;
+window 		<= window_open;
 door		<= door_open;
-vacation <= vacation_mode;
+vacation	<= vacation_mode;
 AC 		<= cm_less;
 furnace 	<= cm_greater;
 
@@ -38,7 +38,6 @@ furnace 	<= cm_greater;
 blower_Function: process (cm_equals, window_open, door_open, MC_test_mode) is 
 
 begin
-
 	-- When blower should be on 
 	if ( (MC_test_mode = '0') AND (window_open = '0') AND (door_open = '0') AND (cm_equals = '0') ) then
       blow_var <= '1';	  
@@ -50,7 +49,6 @@ begin
 	 blower <= blow_var;
 
 end process;
-
 
 -- At temp properties process
 at_temp_Function: process (cm_equals, blow_var) is 
@@ -113,7 +111,6 @@ begin
 		decrease <= '0';
 		
 		end if;
-		
 	end if;
 	
 end process;
